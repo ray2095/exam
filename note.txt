@@ -1,0 +1,26 @@
+
+Different type of exam
+Can choose their exam desired language
+Exam Request
+Exam question with multiple answer
+Manage exam
+Manage exam category
+User management
+Test Result
+Test request management
+Secure Coding
+
+測驗形式:
+單選題
+複選題
+問答題
+是非題
+大題帶子題
+題目中包含圖案或影片
+ABC答案
+123答案
+每次顯示一題
+每次顯示特定題目數量(依設定決定)
+答案選項亂數排列
+亂數選題
+選擇題四選項五選項自動識別

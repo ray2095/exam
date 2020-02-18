@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>EXAM</title>
+	<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+	<ol id="exm"></ol>
+<script>
+document.addEventListener('DOMContentLoaded', function(){
+	doPost({op:'qshow', id:3});
+});
+function doPost(data){
+	var formData = new FormData();
+	for (var ndx in data)
+		formData.append(ndx, data[ndx]);
+
+	var xhr = new XMLHttpRequest();
+	xhr.onload = function(){
+		if (xhr.status >= 200 && xhr.status < 300) {
+			var posts = JSON.parse(xhr.responseText);
+			for(var i = 0; i < posts.total; i++){
+				var exm = document.createElement('li');
+				var ansCount = (posts.rows[i].ans5 == null) ? 4 : 5;
+				var ans = '<h3>' + posts.rows[i].question + '</h3><ol class="ans">';
+				for(var j = 1; j <= ansCount; j++)
+					ans += '<li><label><input type="radio" name="answer'+ i +'" value=' + j + '><span></span>' + posts.rows[i]['ans' + j] +'</label></li>';
+				ans += '</ol>';
+				exm.innerHTML = ans;
+				document.getElementById('exm').append(exm);
+			}
+		} else {
+			console.log(xhr.responseText);
+		}
+	};
+	xhr.open('POST', 'act.php', true);
+	xhr.send(formData);
+}
+function _(el){
+	return document.querySelector(el);
+}
+// window.post = function(data) {
+// 	const formData = new FormData();
+// 	for (var ndx in data)
+// 		formData.append(ndx, data[ndx]);
+// 	return fetch('act.php', {method:'POST', body:formData}).then(res => {console.log(res.json())});
+// }
+
+</script>
+</body>
+</html>
