@@ -10,6 +10,4 @@ input[type="radio"] + span{
     vertical-align:middle;
     background:url(check_radio_sheet.png) -38px top no-repeat;
 }
-input[type="radio"]:checked + span{
-    background:url(check_radio_sheet.png) -57px top no-repeat;
-}
+input[type="radio"]:checked + span{background:url(check_radio_sheet.png) -57px top no-repeat}

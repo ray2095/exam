@@ -89,8 +89,6 @@ function chkRequest($r){
 }
 
 function indb($sql){
-	if(isset($_SESSION['user'])) {
-		global $pdo;
-		return ($pdo->exec($sql)) ? true : false;
-	}
+	global $pdo;
+	return ($pdo->exec($sql)) ? true : false;
 }
