@@ -5,19 +5,53 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<title>EXAM</title>
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Michroma">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 	<link rel="stylesheet" href="../css/materialize.min.css">
 	<script src="../js/materialize.min.js"></script>
 	<style>
-		body{font-family:'Microsoft JhengHei', '微軟正黑體', sans-serif;color:#ccc;background-color:#40464b}
+		body{
+			display: flex;
+			min-height: 100vh;
+			flex-direction: column;
+			font-family:'Microsoft JhengHei', '微軟正黑體', sans-serif;
+			color:#ccc;
+			background-color:#40464b;
+		}
+		main{flex: 1 0 auto}
+		#clock{font-family:'Michroma', sans-serif;color:#66ff99;font-size:40px;text-align:right}
 		ol.ansOp{list-style-type:upper-alpha}
 	</style>
 </head>
 <body>
-	<ol id="exm"></ol>
+	<div class="navbar-fixed">
+		<nav class="teal">
+			<div class="container">
+				<div class="nav-wrapper">
+					<div class="brand-logo">EXAM測驗系統</div>
+					<div id="clock"></div>
+				</div>
+			</div>
+		</nav>
+	</div>
+	<main>
+		<div class="container">
+			<ol id="exm"></ol>
+		</div>
+	</main>
+	<footer class="page-footer">
+		<div class="footer-copyright">
+			<div class="container">
+				&copy; 2020 All Rights Reserved. <span class="author">System Design by Raymond. Chang.</span>
+				<a class="grey-text text-lighten-4 right" href="#!">More Links</a>
+			</div>
+		</div>
+	</footer>
 <script>
 document.addEventListener('DOMContentLoaded', function(){
-	doPost({op:'qshow', mode:1, qn:4});	// mode 1: 循序顯示; mode 2: 隨機顯示; qn:題目數量
+	doPost({op:'qshow', mode:1, qn:10});	// mode 1: 循序顯示; mode 2: 隨機顯示; qn:題目數量
 });
+currentTime();
 function doPost(data){
 	const formData = new FormData();
 	for (let ndx in data)
@@ -30,10 +64,10 @@ function doPost(data){
 			for (let i = 0; i < posts.total; i++){
 				let exm = document.createElement('li');
 				let ansCount = (posts.rows[i].ans5 == null) ? 4 : 5;
-				let ans = '<p class="question">' + posts.rows[i].question + '</p><ol class="ansOp">';
+				let ans = '<div class="divider"></div><div class="section"><p class="question">' + posts.rows[i].question + '</p><ol class="ansOp">';
 				for (let j = 1; j <= ansCount; j++)
 					ans += '<li><label><input type="radio" name="answer'+ i +'" value=' + j + ' class="with-gap"><span>' + posts.rows[i]['ans' + j] +'</span></label></li>';
-				exm.innerHTML = ans + '</ol>';
+				exm.innerHTML = ans + '</ol></div>';
 				document.getElementById('exm').append(exm);
 			}
 		} else {
@@ -52,6 +86,22 @@ function _(el){
 // 		formData.append(ndx, data[ndx]);
 // 	return fetch('act.php', {method:'POST', body:formData}).then(res => {console.log(res.json())});
 // }
+
+// Clock
+function currentTime(){
+	var date = new Date();
+	var hour = date.getHours();
+	var min = date.getMinutes();
+	var sec = date.getSeconds();
+	hour = updateTime(hour);
+	min = updateTime(min);
+	sec = updateTime(sec);
+	document.getElementById('clock').innerText = hour + ' : ' + min + ' : ' + sec;
+	var t = setTimeout(function(){currentTime() }, 1000);
+}
+function updateTime(k){
+	return (k < 10) ? '0' + k : k;
+}
 </script>
 </body>
 </html>
