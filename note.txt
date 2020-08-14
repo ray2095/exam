@@ -30,3 +30,21 @@ Client端可設定選擇:
 題目顯示方式: 卡片模式:每次顯示一題; 考卷模式:每次顯示N題
 答題時間
 難度
+Tag
+可分析(Owner, 全部)答錯題目, 並挑選加強
+
+SVG Inline
+網頁上使用一些小Icon時, 為了減少http request, 可以將圖形用base64編碼之後內崁在html或是css中. 這是一種很普遍使用的技巧.
+但是如果小圖示採用svg格式時, 用base64編碼就多此一舉了.
+我們可以將svg最佳化(透過https://jakearchibald.github.io/svgomg/)之後, 直接將圖示的程式碼當作tag寫入html;
+或是用https://www.zhangxinxu.com/sp/svgo/ 轉換成css專用的形式放入css中使用.
+當svg崁入css時要注意, 為了讓IE瀏覽器能正常render, 有些字元必須作urlencode(", %, #, {, }, <, >等字元), 其他字元則無需ENCODE.
+
+可惜目前圖示是以background方式將svg崁入css中, 尚無方法利用其他css指定其顏色.
+
+參考資料:
+https://www.youtube.com/watch?v=3-f9gdbFWOs
+https://www.zhangxinxu.com/wordpress/2018/08/css-svg-background-image-base64-encode/
+
+Online Tool:
+https://yoksel.github.io/url-encoder/

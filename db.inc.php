@@ -92,3 +92,10 @@ function indb($sql){
 	global $pdo;
 	return ($pdo->exec($sql)) ? true : false;
 }
+function ansodr($ans, $order){
+	$odr = array_map('intval', str_split($order));
+	$new = array();
+	foreach($odr as $v)
+		$new[] = $ans[$v-1];
+	return $new;
+}
